@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../util/item_card.dart';
+import '../util/shops.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,11 +13,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //
-
   final List itemsList = [
+    // name, price, image, color
     ['Orange', 1.99, 'lib/images/orange.png', '0xFFFEDF8D'],
     ['Apple', 1.99, 'lib/images/apple.png', '0xFFFEE3E3'],
     ['Guava', 1.99, 'lib/images/guava.png', '0xFFE1F9D9'],
+  ];
+
+  final List shopList = [
+    // name, time, image, rating, distance
+    ['Shopify', '09:00 - 10:00', 'lib/images/shopify.png', 3.5, 1.3],
+    ['Ebay', '09:00 - 10:00', 'lib/images/ebay.png', 4.5, 1.5],
+    ['Amazon', '09:00 - 10:00', 'lib/images/amazon.png', 5.5, 1.7],
   ];
 
   @override
@@ -191,6 +199,26 @@ class _HomePageState extends State<HomePage> {
               color: Colors.grey,
               fontWeight: FontWeight.w600,
             ),
+          ),
+        ),
+
+        const SizedBox(height: 20),
+
+        // Near You List
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: ListView.builder(
+                itemCount: shopList.length,
+                itemBuilder: (context, index) {
+                  return nearYouCard(
+                    shopName: shopList[index][0],
+                    time: shopList[index][1],
+                    shopLogo: shopList[index][2],
+                    rating: shopList[index][3],
+                    distance: shopList[index][4],
+                  );
+                }),
           ),
         ),
       ]),
